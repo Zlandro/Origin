@@ -1,0 +1,36 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/')
+def accueil():
+    return "Bienvenu sur mon API flask !"
+
+
+@app.route('/hello')
+def hello():
+    return "bonjour"
+    
+@app.route('/add')
+def add():
+    a = int(request.args.get("a", 30))
+    b = int(request.args.get("b", 0))
+    return f"le resultat est : {a+b}"
+    
+@app.route("/info")
+def info():
+    return jsonify({"app": "Flask API", "version": "1.0"} )
+    
+    
+@app.route("/hello_post", methods = ["POST"])
+def hello_post():
+    data = request.get_json()
+    nom = data.get("nom", "inconnu")
+    
+    return jsonify({"message": f"{nom}"})
+    
+    
+
+   
+if __name__ == "__main__":
+    app.run(debug=True)
