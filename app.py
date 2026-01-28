@@ -5,3 +5,6 @@ app=Flask(__name__)
 def accueil():
   return print("first git")
 
+@app.route("/info")
+def info():
+return print("git reussi")
